@@ -139,6 +139,7 @@ function initialize(userInput) {
 //resets needed variables for fresh round
 function reset() {
   guessChances = 10;
+  gamesPlayed++;
   hiddenWord = '';
   pickedWord = '';
   guessedLetters = [];
