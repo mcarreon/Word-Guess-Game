@@ -34,53 +34,32 @@ var userGuessedLetters = document.getElementById('game-guessed');
 var userInstructions = document.getElementById('game-instructions');
 var userGameFinishedWord = document.getElementById('game-finished-word');
 
-//  arrays  //
-
-var hangmanWordsStatic = [
-  'KANYE',
-  'SHWAYZE',
-  'FATHER',
-  'TUPAC',
-  'BLOODSTONE',
-  'PARLIAMENT',
-  'JOJI',
-  'SMOKEPURPP',
-  'DRAKE',
-  'LOGIC',
-  'XXXTENTACION',
-  'JEREMIH',
-  'PROBLEM',
-  'NERD',
-  'KAMAIYAH',
-  'TOWKIO',
-  'WALE',
-  'PHARCYDE',
-  'QTIP'
-];
-
-
 var hangmanWords = [
-  'KANYE',
-  'SHWAYZE',
-  'FATHER',
-  'TUPAC',
-  'BLOODSTONE',
-  'PARLIAMENT',
-  'JOJI',
-  'SMOKEPURPP',
-  'DRAKE',
-  'LOGIC',
-  'XXXTENTACION',
-  'JEREMIH',
-  'PROBLEM',
-  'NERD',
-  'KAMAIYAH',
-  'TOWKIO',
-  'WALE',
-  'PHARCYDE',
-  'QTIP',
-  'TPAIN'
-];
+    'KANYE',
+    'SHWAYZE',
+    'FATHER',
+    'TUPAC',
+    'BLOODSTONE',
+    'PARLIAMENT',
+    'JOJI',
+    'SMOKEPURPP',
+    'DRAKE',
+    'LOGIC',
+    'XXXTENTACION',
+    'JEREMIH',
+    'PROBLEM',
+    'NERD',
+    'KAMAIYAH',
+    'TOWKIO',
+    'WALE',
+    'PHARCYDE',
+    'QTIP',
+    'TPAIN'
+  ];
+
+
+
+//  arrays  //
 
 
 var wordLetters = []; //  array of available correct letters, corresponds to picked word
@@ -135,14 +114,17 @@ document.onkeyup = function(event) {
     }
 
     //  if out of words, and the current word letters length is 0
-    if ( hangmanWords.length <= 0 && (wordLetters.length <= 0 || guessChances === 0)) {
+    if (
+      hangmanWords.length <= 0 &&
+      (wordLetters.length <= 0 || guessChances === 0)
+    ) {
       if (wordLetters.length <= 0) {
         gamesWon++;
       }
       gamesPlayed++;
       debugger;
       gameOver = true;
-      debugger; 
+      debugger;
       userGameStarted.textContent =
         "You've reached the end of the road. Your score is: " +
         gamesWon +
@@ -161,7 +143,6 @@ document.onkeyup = function(event) {
       gamesWon++;
       userGameFinishedWord.textContent = pickedWordStatic;
       reset();
-      
     }
   }
 };
@@ -245,10 +226,12 @@ function isGuessed(input) {
   }
   return false;
 }
+
 //returns whether char is a letter
 function isAlpha(char) {
   return /^[A-Z]$/i.test(char);
 }
+
 //reads for available correct letters and replaces correct inputs
 function correctInput(input) {
   for (var i = 0; i < wordLetters.length; i++) {
@@ -281,6 +264,7 @@ function correctInput(input) {
     }
   }
 }
+
 //checks for good input, kinda wet may fix later
 function isGoodInput(input) {
   for (var i = 0; i < pickedWordStatic.length; i++) {
