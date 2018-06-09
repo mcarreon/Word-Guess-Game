@@ -23,6 +23,8 @@ data needed
     array of guessed letters 
 */
 
+//  did this basic version with vanilla JS, and not object based.
+
 var userGameStarted = document.getElementById('game-start');
 var userGamesPlayed = document.getElementById('game-total');
 var userGamesWon = document.getElementById('game-won');
@@ -30,25 +32,65 @@ var userGuessChances = document.getElementById('game-chances');
 var userWordToGuess = document.getElementById('game-word');
 var userGuessedLetters = document.getElementById('game-guessed');
 var userInstructions = document.getElementById('game-instructions');
+var userGameFinishedWord = document.getElementById('game-finished-word');
 
 //  arrays  //
-var hangmanWords = [
+
+var hangmanWordsStatic = [
   'KANYE',
-  'SCHWAYZE',
+  'SHWAYZE',
   'FATHER',
   'TUPAC',
   'BLOODSTONE',
   'PARLIAMENT',
-  'JOJI'
+  'JOJI',
+  'SMOKEPURPP',
+  'DRAKE',
+  'LOGIC',
+  'XXXTENTACION',
+  'JEREMIH',
+  'PROBLEM',
+  'NERD',
+  'KAMAIYAH',
+  'TOWKIO',
+  'WALE',
+  'PHARCYDE',
+  'QTIP'
 ];
+
+
+var hangmanWords = [
+  'KANYE',
+  'SHWAYZE',
+  'FATHER',
+  'TUPAC',
+  'BLOODSTONE',
+  'PARLIAMENT',
+  'JOJI',
+  'SMOKEPURPP',
+  'DRAKE',
+  'LOGIC',
+  'XXXTENTACION',
+  'JEREMIH',
+  'PROBLEM',
+  'NERD',
+  'KAMAIYAH',
+  'TOWKIO',
+  'WALE',
+  'PHARCYDE',
+  'QTIP',
+  'TPAIN'
+];
+
+
 var wordLetters = []; //  array of available correct letters, corresponds to picked word
-var guessedLetters = [];  //  container for past user guesses
+var guessedLetters = []; //  container for past user guesses
 
 //  string  //
 var hiddenWord = ''; //  handles displaying the word
 var pickedWordStatic = ''; //  static container for the target word
 var pickedWord = ''; //  target word
-var testWord = "Naruto"; //   hokage
+var testWord = 'Naruto'; //   hokage
 
 //  ints    //
 var gamesPlayed = 0;
@@ -57,47 +99,78 @@ var guessChances = 10;
 
 //  bool    //
 var gameStarted = false;
+var gameOver = false;
 
-document.onkeyup = function (event) {
+document.onkeyup = function(event) {
   var userInput = event.key;
 
-  //  initialze game if new
-  if (gameStarted == false) {
-    initialize(userInput);
-  } 
-  //  if out of guesses, show bio, and reinitialize game for next round
-  else if (guessChances === 0) {
-    reset();
-  }
-  //  if game is already initialized
-  else {
-    //  converts all input to uppercase
-    var input = userInput.toUpperCase();
+  if (gameOver === false) {
+    //  initialze game if new
+    if (gameStarted === false) {
+      initialize(userInput);
+    }
+    //  if game is already initialized
+    else {
+      //  converts all input to uppercase
+      var input = userInput.toUpperCase();
 
-    //  reads for available correct letters and replaces
-    correctInput(input);
+      //  reads for available correct letters and replaces
+      correctInput(input);
 
-    //  if input hasnt been guessed before, push to guessed letters and decrement chances if bad letter
-    if (!isGuessed(input) && isAlpha(input)) {
-      guessedLetters.push(input);
-      if (!isGoodInput(input)) {
+      //  if input hasnt been guessed before, push to guessed letters and decrement chances if bad letter
+      if (!isGuessed(input) && isAlpha(input)) {
+        guessedLetters.push(input);
+        if (!isGoodInput(input)) {
+          guessChances--;
+          userGuessChances.textContent = guessChances;
+        }
+      }
+      //  if letter is wrong, decrement chances
+      if (!isGoodInput(input) && !isGuessed(input) && isAlpha(input)) {
+        console.log(2);
         guessChances--;
         userGuessChances.textContent = guessChances;
       }
+      userGuessedLetters.textContent = guessedLetters;
     }
-    //  if letter is wrong, decrement chances
-    if (!isGoodInput(input) && !isGuessed(input) && isAlpha(input)) {
-      console.log(2);
-      guessChances--;
-      userGuessChances.textContent = guessChances;
+
+    //  if out of words, and the current word letters length is 0
+    if ( hangmanWords.length <= 0 && (wordLetters.length <= 0 || guessChances === 0)) {
+      if (wordLetters.length <= 0) {
+        gamesWon++;
+      }
+      gamesPlayed++;
+      debugger;
+      gameOver = true;
+      debugger; 
+      userGameStarted.textContent =
+        "You've reached the end of the road. Your score is: " +
+        gamesWon +
+        '/20';
+      userGamesPlayed.textContent = gamesPlayed;
+      userGamesWon.textContent = gamesWon;
+      userGameFinishedWord.textContent = pickedWordStatic;
     }
-    userGuessedLetters.textContent = guessedLetters;
+    //  if out of guesses, show bio, and reinitialize game for next round
+    else if (guessChances === 0) {
+      userGameFinishedWord.textContent = pickedWordStatic;
+      reset();
+    }
+    //  if game is won, ie. wordLetters is empty, show bio and inc wins + games played
+    else if (wordLetters.length <= 0 && gameStarted !== false) {
+      gamesWon++;
+      userGameFinishedWord.textContent = pickedWordStatic;
+      reset();
+      
+    }
   }
 };
 
 //picks a word from available word bank
 function pickWord() {
-  var word = hangmanWords[Math.floor(Math.random() * hangmanWords.length)];
+  var wordIndex = Math.floor(Math.random() * hangmanWords.length);
+  var word = hangmanWords[wordIndex]; //pics rando word from list
+  hangmanWords.splice(wordIndex, 1);
   return word;
 }
 
@@ -116,18 +189,15 @@ function setWord(word) {
 
 //initializes game
 function initialize(userInput) {
-  if (
-    userInput === ' ' ||
-    userInput === 'Spacebar' ||
-    userInput === 'Enter'
-  ) {
+  if (userInput === ' ' || userInput === 'Spacebar' || userInput === 'Enter') {
     gameStarted = true;
     pickedWord = pickWord();
     pickedWordStatic = pickedWord;
     setWord(pickedWord);
     console.log(pickedWord);
-    userGameStarted.textContent = "Game Started";
-    userInstructions.textContent = "Guess the letter by pressing the corresponding key";
+    userGameStarted.textContent = 'Game Started';
+    userInstructions.textContent =
+      'Guess the letter by pressing the corresponding key';
     userWordToGuess.textContent = hiddenWord;
     userGamesPlayed.textContent = gamesPlayed;
     userGamesWon.textContent = gamesWon;
@@ -175,7 +245,7 @@ function isGuessed(input) {
   }
   return false;
 }
-//returns whether char is a letter 
+//returns whether char is a letter
 function isAlpha(char) {
   return /^[A-Z]$/i.test(char);
 }
@@ -190,22 +260,23 @@ function correctInput(input) {
     else if (isGuessed(input)) {
       break;
     }
-    //  if the input is correct, replace chars in hiddenWord, and splice out the corresponding chars from wordLetters 
+    //  if the input is correct, replace chars in hiddenWord, and splice out the corresponding chars from wordLetters
     else if (input === wordLetters[i]) {
       var wordIndex = [];
       wordIndex = findChar(input);
 
-      //  replaces the _ in the game word 
+      //  replaces the _ in the game word
       for (var n = 0; n < wordIndex.length; n++) {
         hiddenWord = setChar(hiddenWord, wordIndex[n] * 2, input);
       }
       //  takes input char out of available word letters
       for (var x = 0; x < wordLetters.length; x++) {
-        if (wordLetters[x] == input) {
+        if (wordLetters[x] === input) {
           wordLetters.splice(x, 1);
+          x = -1; //resets x, in case of adjacent duplicates. I realize I could just screen for duplicates on wordLettesr creation but oh well.
         }
       }
-      
+
       userWordToGuess.textContent = hiddenWord;
     }
   }
@@ -219,7 +290,3 @@ function isGoodInput(input) {
   }
   return false;
 }
-
-
-
-
