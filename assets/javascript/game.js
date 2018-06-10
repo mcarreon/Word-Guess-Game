@@ -122,9 +122,7 @@ document.onkeyup = function(event) {
         gamesWon++;
       }
       gamesPlayed++;
-      debugger;
       gameOver = true;
-      debugger;
       userGameStarted.textContent =
         "You've reached the end of the road. Your score is: " +
         gamesWon +
@@ -175,7 +173,7 @@ function initialize(userInput) {
     pickedWord = pickWord();
     pickedWordStatic = pickedWord;
     setWord(pickedWord);
-    console.log(pickedWord);
+    //console.log(pickedWord);
     userGameStarted.textContent = 'Game Started';
     userInstructions.textContent =
       'Guess the letter by pressing the corresponding key';
@@ -218,6 +216,7 @@ function findChar(char) {
   return indexes;
 }
 
+//returns true if char has been prev guessed
 function isGuessed(input) {
   for (var i = 0; i < guessedLetters.length; i++) {
     if (input === guessedLetters[i]) {
