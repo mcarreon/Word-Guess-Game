@@ -1,66 +1,75 @@
-<!--
-To-do list: <br>
-display games played
-display wins
-display hangman Word
-display # of guesses left
-display letters already guessed
-
-ask for enter/spacebar to start
-    if word is guessed
-        tell user, and show image
-        restart game on new word
-    if # of guesses remaining is 0
-        alert user
-        increment games played
-        show the word, and move to new word
-    choose a key
-        if its right, add to blank Word
-        if its wrong, decrement # of guesses and alert user
-        add letter to already guessed letters
-
-
-data needed 
-    # games played
-    # wins
-    # of guesses left
-    array for hangman words
-    string for hangman word
-    string for blank word
-    array of guessed letters 
--->
-
-<!DOCTYPE html>
+<!DOCTYPE HTML5>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Word Guess Game</title>
+    <title>Word Guess Game Advanced</title>
+    <link href="https://fonts.googleapis.com/css?family=Share+Tech+Mono" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/style.css">
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
 </head>
 <body>
-    <h1 id="game-start">Please press spacebar or enter to start.</h1>
-    <div id="game-instructions"></div><br>
-    <div>
-        Previous Word: <span id="game-finished-word"></span>
-    </div><br>
-    <div>
-        Rounds played: <span id="game-total">0</span>
-        Rounds won: <span id="game-won">0</span> 
-    </div><br>
-    <div>
-        Number of guesses left: <span id="game-chances"></span>
-    </div><br>
-    <div>
-        <span id="game-word"></span>
-    </div><br>
-    <div>
-        <span id="game-guessed"></span>
+    <section class="container">
+        <div class="aside">
+            <div class="aside-box">
+                <div>
+                    <span id="game-finished-word"></span>
+                </div>
+                <div id="aside-image"></div>
+                <div id="aside-content"></div>
+            </div>
+        </div>
+        <div class="game-area">
+            <div class="game-message">
+                <div class="game-instructions"></div>
+                <div id="kanye">
+                    <img src="assets/images/kanyebg.png" alt="dont fear kanye" class="goat">
+                </div>
+                <div class="game-instructions"></div>
+            </div>
+            <span id="game-word"></span>
+            <div class="game-info">
+                <div>
+                    number of guesses left: <span id="game-chances">...</span>
+                </div>
+                <div>
+                    rounds played: <span id="game-total">...</span>
+                </div>
+                <div>
+                    rounds won: <span id="game-won">...</span>
+                </div> 
+            </div>
+        </div>
+        <div class="guessed-letters">
+            <div class="game-letters-info"></div>
+            <div style="width: 100px; height: 100px"></div> <!-- needed to center item -->
+            <div class="game-guessed">
+                <span id="game-guessed"></span>
+            </div>
+            <div style="width: 100px; height: 100px"></div> <!-- needed to center item -->
+        </div>
+        <div class="dialog">
+            <div class="kanye-dialog">
+                <h1 id="game-start"></h1><br>
+                <div id="kanye-instructions"></div>
+            </div>
+            <div class="user-dialog typing"><span class="dialog-start">press enter or spacebar to talk to mr. kanye. </span><span class="game-input">_</span></div>
+        </div>
+    </section>
+    <div class="footer">
+        <span><a href="indexBas.html">basic ver.</a></span>
+        <span><a href="https://github.com/mcarreon/Word-Guess-Game" target="_blank">check this out on github</a></span>
     </div>
-    
-
-    <script src="assets/javascript/game.js"></script>
+    <audio id="audio">
+        <source src="assets/music/bg.mp3" type="audio/mpeg"></source>
+    Your browser does not support the audio element.
+    </audio>
+    <script src="assets/javascript/gameAdv.js"></script>
 </body>
 </html>
+

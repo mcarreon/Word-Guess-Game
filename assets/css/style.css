@@ -12,7 +12,8 @@ body {
 
 .container {
     margin: 30px;
-    height: 93vh;
+    margin-bottom: 0px;
+    height: 92vh;
     border: 1px solid rgba(26, 255, 0, 0.747);
     display: grid;
     grid-template-areas: 
@@ -25,6 +26,24 @@ body {
 .aside {
     grid-area: aside;
     border-right: 1px solid rgba(26, 255, 0, 0.747);
+    color: rgba(102, 51, 153, 0.719);
+}
+
+.aside-box {
+    display: flex; 
+    height: 100%;
+    align-items: center;
+    flex-direction: column;
+}
+
+.bio-image {
+    max-height: 300px;
+    max-width: 250px;
+}
+
+#aside-content {
+    padding: 10px;
+    font-size: .75em;
 }
 
 .game-area {
@@ -45,13 +64,62 @@ body {
     justify-content: space-between;
 }
 
+.game-message {
+    display: flex;
+    justify-content: space-around;
+    align-content: center;
+    width: 100%;
+}
+
+.game-instructions {
+    width: 100%;
+    margin: auto;
+    margin-left: 40px;
+}
+
 .guessed-letters {
+    display: flex;
     grid-area: guessed-letters;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
     border-bottom: 1px solid rgba(26, 255, 0, 0.747);
+}
+
+.guessed-letters > div {
+    margin-top: 5px;
+    padding-left: 5px;
+    font-size: 1.3em;
+}
+
+.game-guessed {
+    padding: 0;
 }
 
 .dialog {
     grid-area: dialog;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.user-dialog {
+    margin: 5px;
+}
+
+#game-start {
+    margin: 5px;
+}
+
+#kanye-instructions {
+    margin: 5px;
+    font-size: 1.2em;
+}
+
+.game-input {
+    margin: 5px;
+    font-size: 1.5em;
+    animation: blink-caret .75s step-end infinite;
 }
 
 #kanye {
@@ -62,4 +130,56 @@ body {
 
 #game-word { 
     font-size: 2em;
+}
+
+#game-finished-word {
+    font-size: 3em;
+}
+
+.typing {
+    overflow: hidden;
+    white-space: nowrap;
+    animation: typing 3.5s steps(40,end);
+    transition: typing 3.5s steps(40,end);
+}
+
+.shake {
+    animation: shake 0.5s;
+    animation-iteration-count: 7;
+}
+
+.footer {
+    font-size: .6em;
+    position: fixed;
+    bottom: 15px;
+    right: 60px;
+}
+
+a:link { color: rgba(245, 245, 245, 0.507);}
+a:visited { color: rgba(245, 245, 245, 0.507);}
+a:hover { color: rgba(102, 51, 153, 0.719);}
+
+
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+@keyframes blink-caret {
+    from, to { color: transparent }
+    50% { color: rgba(0, 255, 68, .44); }
+}
+
+@keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
 }
