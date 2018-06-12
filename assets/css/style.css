@@ -1,0 +1,65 @@
+html {
+    height: 100%;
+}
+
+body {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1.3em;
+    background-color: black;
+    color: rgba(0, 255, 68, .44);
+    margin: 30px;
+}
+
+.container {
+    margin: 30px;
+    height: 93vh;
+    border: 1px solid rgba(26, 255, 0, 0.747);
+    display: grid;
+    grid-template-areas: 
+        "aside game-area guessed-letters"
+        "aside dialog dialog";
+    grid-template-columns: 1fr 2fr 1fr; 
+    grid-template-rows: 1.5fr 1fr;
+}
+
+.aside {
+    grid-area: aside;
+    border-right: 1px solid rgba(26, 255, 0, 0.747);
+}
+
+.game-area {
+    grid-area: game-area;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    border-right: 1px solid rgba(26, 255, 0, 0.747);
+    border-bottom: 1px solid rgba(26, 255, 0, 0.747);
+}
+
+.game-info {
+    font-size: .8em;
+    display: flex;
+    width: 95%;
+    margin: 0px 10px 5px 10px;
+    justify-content: space-between;
+}
+
+.guessed-letters {
+    grid-area: guessed-letters;
+    border-bottom: 1px solid rgba(26, 255, 0, 0.747);
+}
+
+.dialog {
+    grid-area: dialog;
+}
+
+#kanye {
+    height: 214px;
+    border: 1px solid rgba(26, 255, 0, 0.747);
+    margin-top: 20px;
+}
+
+#game-word { 
+    font-size: 2em;
+}
