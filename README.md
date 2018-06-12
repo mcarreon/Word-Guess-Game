@@ -5,7 +5,7 @@ Just a simple game of hangman with a kanye touch to it. The rules are basic: you
 ## Other
 
 The default version is made with objects and jquery, and the styling has a grid and a few flexboxes. You can check out the prototype I made in Adobe XD here:
-![alt text](https://mcarreon.github.io/Word-Guess-Game/assets/xd/prototype.png "prototype")
+![for some reason this link isnt showing :(, but the png is in assets/xd](https://mcarreon.github.io/Word-Guess-Game/assets/xd/prototype.png "prototype")
 
 
 
