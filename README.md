@@ -1,4 +1,4 @@
-# Word-Guess-Game
+# kanye in danger
 
 Just a simple game of hangman with a kanye touch to it. The rules are basic: you get 15 tries per word, and 20 words in 1 game. Help kanye remember his friends!
 
