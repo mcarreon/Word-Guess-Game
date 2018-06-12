@@ -4,4 +4,9 @@ Just a simple game of hangman with a kanye touch to it. The rules are basic: you
 
 ## Other
 
-The default version is made with objects and jquery, and the styling has a grid and a few flexboxes. There is also the [basic version](https://mcarreon.github.io/Word-Guess-Game/indexBas.html), which I made before with vanilla js. The basic version does not have the info or styling.
+The default version is made with objects and jquery, and the styling has a grid and a few flexboxes. You can check out the prototype I made in Adobe XD here:
+![alt text](https://mcarreon.github.io/Word-Guess-Game/assets/xd/prototype.png "prototype")
+
+
+
+There is also the [basic version](https://mcarreon.github.io/Word-Guess-Game/indexBas.html), which I made before with vanilla js. The basic version does not have the info or styling.
