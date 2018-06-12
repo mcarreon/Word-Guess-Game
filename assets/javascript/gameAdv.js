@@ -133,7 +133,7 @@ var game = {
     //  ints
     gamesPlayed: 0,
     gamesWon: 0,
-    guessChances: 15,
+    guessChances: 10,
     wordIndex: 0,
 
     //  bool
@@ -199,7 +199,7 @@ var game = {
 
     //resets needed variables for fresh round
     reset: function () {
-        this.guessChances = 15;
+        this.guessChances = 10;
         this.gamesPlayed++;
         this.hiddenWord = '';
         this.pickedWord = '';
