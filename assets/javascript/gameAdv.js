@@ -370,6 +370,7 @@ document.onkeyup = function (event) {
         //  if out of guesses, show bio, and reinitialize game for next round
         else if (game.guessChances === 0) {
             userGameFinishedWord.text(game.pickedWordStatic);
+            game.clearBio();
             game.fillBio(game.wordIndex);
             game.reset();
         }
